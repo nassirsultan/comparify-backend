@@ -15,7 +15,7 @@ import com.nassir.documentcomparison.domain.ComparisonResponse;
 import com.nassir.documentcomparison.domain.ComparisonResult;
 import com.nassir.documentcomparison.service.ComparisonService;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000"})
 @RestController
 public class ComparisonController {
 
