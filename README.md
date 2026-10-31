@@ -4,7 +4,7 @@
 
 Spring Boot REST API that powers the Comparify document comparison app using Cosine Similarity algorithm.
 
-## 🧠 AlgorithmAdd SonarQube Cloud quality gate badge to README
+## 🧠 Algorithm
 
 Documents are compared using **Cosine Similarity**:
 1. Extract text from uploaded files
