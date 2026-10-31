@@ -2,7 +2,8 @@ package com.nassir.documentcomparison.controller;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,24 +24,29 @@ import com.nassir.documentcomparison.service.ComparisonService;
 @RestController
 public class ComparisonController {
 
-	@Autowired
-	private ComparisonService service;
+	private static final Logger log = LoggerFactory.getLogger(ComparisonController.class);
+	private final ComparisonService service;
+
+	public ComparisonController (ComparisonService service){
+		this.service = service;
+	}
 
 	@PostMapping("/api/compare")
 	private ResponseEntity<ComparisonResponse> compare(@RequestParam MultipartFile file1,
 			@RequestParam MultipartFile file2) {
 
-		if (!file1.getContentType().equals("text/plain") || !file2.getContentType().equals("text/plain")) {
+		if (!"text/plain".equals(file1.getContentType()) || !"text/plain".equals(file2.getContentType())) {
 			return new ResponseEntity<>(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
 		}
-		ComparisonResult result = new ComparisonResult(0,"");
+
+        var result = new ComparisonResult(0,"");
 		try {
 			result = service.compare(new String(file1.getBytes()), new String(file2.getBytes()));
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error("Failed to read uploaded files", e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<ComparisonResponse>(new ComparisonResponse(result.similarityScore(), result.aiInsights()), HttpStatus.OK);
+		return new ResponseEntity<>(new ComparisonResponse(result.similarityScore(), result.aiInsights()), HttpStatus.OK);
 	}
 
 }

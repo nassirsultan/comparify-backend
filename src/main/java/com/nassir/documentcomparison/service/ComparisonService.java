@@ -4,10 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import com.nassir.documentcomparison.domain.ComparisonResult;
 @Service
 public class ComparisonService {
 	
+	private static final Logger log = LoggerFactory.getLogger(ComparisonService.class);
 	private final ChatClient client;
 
 	public ComparisonService(ChatClient.Builder builder) {
@@ -46,7 +48,7 @@ public class ComparisonService {
 			Prompt prompt = promptTemplate.create(Map.of("file1Text", file1Text, "file2Text", file2Text, "score", score));
 			return client.prompt(prompt).call().content();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("AI insights failed", e);
 			return "";
 		}
 	}
