@@ -1,8 +1,10 @@
 # Comparify - Backend
 
+[![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=nassirsultan_comparify-backend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=nassirsultan_comparify-backend)
+
 Spring Boot REST API that powers the Comparify document comparison app using Cosine Similarity algorithm.
 
-## 🧠 Algorithm
+## 🧠 AlgorithmAdd SonarQube Cloud quality gate badge to README
 
 Documents are compared using **Cosine Similarity**:
 1. Extract text from uploaded files
