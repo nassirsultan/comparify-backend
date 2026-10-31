@@ -39,11 +39,16 @@ public class ComparisonService {
 		var insights = generateInsights(file1Text, file2Text, roundedScore);
 		return new ComparisonResult(Double.parseDouble(roundedScore),insights);
 	}
-	
+
 	public String generateInsights(String file1Text, String file2Text, String score) {
-		PromptTemplate promptTemplate = new PromptTemplate(promptResource);
-		Prompt prompt = promptTemplate.create(Map.of("file1Text", file1Text, "file2Text", file2Text,"score", score));
-		return client.prompt(prompt).call().content();
+		try {
+			PromptTemplate promptTemplate = new PromptTemplate(promptResource);
+			Prompt prompt = promptTemplate.create(Map.of("file1Text", file1Text, "file2Text", file2Text, "score", score));
+			return client.prompt(prompt).call().content();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
 	}
 	
 	
