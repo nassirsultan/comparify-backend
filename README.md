@@ -4,7 +4,7 @@
 
 Spring Boot REST API that powers the Comparify document comparison app using Cosine Similarity algorithm.
 
-## 🧠 Algorithm
+## Algorithm
 
 Documents are compared using **Cosine Similarity**:
 1. Extract text from uploaded files
@@ -13,14 +13,14 @@ Documents are compared using **Cosine Similarity**:
 4. Calculate magnitude of each vector
 5. Return `dot product / (magnitude1 × magnitude2)` as similarity score
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - Java 11
 - Spring Boot
 - Maven
 - REST API
 
-## 📦 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Java 11+
@@ -33,7 +33,7 @@ mvn spring-boot:run
 
 App runs on `http://localhost:8080`
 
-## 🔗 API Endpoints
+## API Endpoints
 
 ### Compare Documents
 `POST /api/compare`
@@ -57,7 +57,7 @@ App runs on `http://localhost:8080`
 | 415 | Unsupported file type (non .txt) |
 | 500 | Internal server error |
 
-## 🔒 Validation
+## Validation
 - Only `.txt` files accepted
 - Both files must be provided
 - File type validated via MIME type check
